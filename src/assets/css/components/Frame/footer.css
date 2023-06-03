@@ -1,0 +1,11 @@
+.footer_box{
+    height: 4vh;
+    background-color: #2b3d4d;
+    position: fixed;
+    bottom:0;
+    text-align: center;
+    margin-right: calc(100vw*0.15 - 10px - 10px);
+    z-index: 3;
+    width: 85vw;
+    margin-left: 15%;
+}

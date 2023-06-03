@@ -1,0 +1,33 @@
+.head_div_all{
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #2b3d4d;
+    background-color: #2b3d4d;
+    display: flex;
+}
+.head_left_title{
+    width: 200px;
+    padding-left: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+
+}
+.head_right_title{
+    width: 200px;
+    color: #ffffff;
+    text-align: center;
+}
+
+.out_icon{
+    margin-left: 20px;
+}
+.dialog-footer button:first-child {
+    margin-right: 10px;
+}
+img {
+    display: flex;
+    width: 30px;
+    height: 30px;
+    margin: 10px 0px 10px 30px;
+}

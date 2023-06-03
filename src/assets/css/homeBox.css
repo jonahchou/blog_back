@@ -1,0 +1,281 @@
+/*
+    首页内容区域统一样式
+*/
+/*
+    内容区域大小和灰色背景
+*/
+.detail_box1{
+    width: calc(100vw - calc(100vw*0.15)) ;
+    height: 90vh;
+    background-color: #eef0f2;
+    overflow: auto;
+}
+/*
+    面包屑
+*/
+.detail_box_bread1{
+    /*  屏幕自适应宽度 - 菜单宽度 - 面包屑左侧宽度 - 面包屑右侧宽度  */
+    width: calc(100vw - calc(100vw*0.15) - 10px - 10px);
+    height: 40px;
+    background-color: #ffffff;
+    margin-top: 10px;
+    margin-left: 10px;
+    display:inline-block;
+    margin-top: 9px;
+    padding-top: 9px;
+}
+/*
+    滚动展示栏
+*/
+.detail_box_scrolling1{
+    /*  屏幕自适应宽度 - 菜单宽度 - 滚动展示栏左侧宽度 - 滚动展示栏右侧宽度  */
+    width: calc(100vw - calc(100vw*0.15) - 10px - 10px);
+    height: 40px;
+    background-color: #ffffff;
+    margin-top: 15px;
+    margin-left: 10px;
+    display:inline-block;
+    text-align: center;
+}
+
+.detail_box_bread_title1{
+    font-size: 16px;
+    margin-left: 20px;
+}
+.detail_box_left_box1{
+    /*  屏幕自适应宽度 - 菜单宽度 - 滚动展示栏左右侧宽度 - 滚动展示栏右侧宽度  */
+    width: calc((100vw - calc(100vw*0.15) - 10px - 10px)/4 + 15px);
+    height: 280px;
+    background-color: #ffffff;
+    float: left;
+    margin-top: 10px;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.detail_box_right_box1{
+    /*  屏幕自适应宽度 - 菜单宽度 - 滚动展示栏左侧宽度 - 滚动展示栏右侧宽度  */
+    width: calc((100vw - calc(100vw*0.15) - 10px - 10px)/3 - 15px);
+    height: 280px;
+    background-color: #ffffff;
+    float: left;
+    margin-top: 10px;
+    margin-left: 15px;
+}
+.detail_box_right_box1 hr{
+    width: calc(((100vw - calc(100vw*0.15) - 10px - 10px)/3));
+    border: none;
+    height: 1px;
+    background-color:#ececec;
+    margin-top: 10px;
+}
+
+.detail_box_left_box_title1{
+    margin-left: 20px;
+    margin-top: 10px;
+}
+.detail_box_left_box1 hr{
+    width: calc(((100vw - calc(100vw*0.15) - 10px - 10px)/3));
+    border: none;
+    height: 1px;
+    background-color:#ececec;
+    margin-top: 10px;
+}
+.detail_box_left_box_icon1{
+    margin-left: 10px;
+    margin-top: 10px;
+    padding-top: 10px;
+    width: 90px;
+    height: 90px;
+    display: inline-block;
+    text-align: center;
+    cursor:pointer;
+}
+.detail_box_right_box_left1{
+    width:  calc(((100vw - calc(100vw*0.15) - 10px - 10px)/2 + 12vw)/2);
+    height: 280px;
+    float: left;
+    display: inline-block;
+}
+.detail_box_right_box_left_data1{
+    margin-left: 10px;
+    margin-top: 10px;
+    padding-top: 10px;
+    width: 150px;
+    height: 80px;
+    display: inline-block;
+}
+/*
+    竖向分割线，如需设置长度，请在行内设置，或重写此样式
+*/
+.line1{
+    margin-top: 10px;
+    padding-top: 10px;
+    background:#E7E7E7;/*背景色为浅灰色*/
+    width:1px;/*设置宽高*/
+    height:70px;
+    position:relative;/*调整位置*/
+    /*left:calc(((100vw - calc(100vw*0.15) - 10px - 10px)/2 + 5.5vw)/2 - 10vw);*/
+    margin-right: 20px;
+    float:right;/*让此div与前面的并排显示*/
+    display: inline-block;
+}
+.detail_box_right_box_left_data_title1{
+    width: 140px;
+    height: 39px;
+    margin-left: 30px;
+}
+.detail_box_right_box_right_data_title1{
+    width: 120px;
+    height: 39px;
+}
+
+.detail_box_right_box_right1{
+    width:  calc(((100vw - calc(100vw*0.15) - 10px - 10px)/3));
+    height: 250px;
+    margin-left: 10px;
+    display: inline-block;
+}
+.detail_box_financial1{
+    margin-left: 10px;
+    width:  calc(100vw - calc(100vw*0.15) - 10px - 10px);
+    height: 65vh;
+    display: inline-block;
+}
+.detail_box_financial_title1{
+    width: calc(100vw - calc(100vw*0.15) - 10px - 10px);
+    height: 60px;
+    background-color: #ffffff;
+    margin-top: 10px;
+    padding-top: 10px;
+    display: inline-block;
+}
+.detail_box_financial_title1_meet_time{
+    width: calc((100vw - calc(100vw*0.15) - 10px - 10px)/3);
+    display: inline-block;
+}
+
+.detail_box_right_box_piehart{
+    /*  屏幕自适应宽度 - 菜单宽度 - 滚动展示栏左右侧宽度 - 滚动展示栏右侧宽度  */
+    width: calc((100vw - calc(100vw*0.15) - 10px - 10px)/3);
+    height: 280px;
+    background-color: #ffffff;
+    float: left;
+    margin-top: 10px;
+    margin-left: 15px;
+    padding-left: 10px;
+    display: inline-block;
+
+}
+.detail_box_financial1 hr{
+    width: calc(100vw - calc(100vw*0.15) - 10px - 10px - 20px );
+    border: none;
+    height: 1px;
+    background-color:#ececec;
+    margin-top: 8px;
+    margin-left: 10px;
+}
+.detail_box_financial_title_text1{
+    margin-left: 20px;
+}
+.detail_box_financial_meet_time1{
+    margin-left: 200px;
+}
+.detail_box_financial_belong_project1{
+    margin-left: 10vw;
+    margin-right: 30px;
+}
+
+/* 三个统计图 */
+.detail_box_financial_statistics1{
+    width: calc(100vw - calc(100vw*0.15) - 10px - 10px);
+    height: 300px;
+    padding-top: 5px;
+}
+.detail_box_financial_statistics_one1{
+    width: calc(100% - (100vw - calc(100vw*0.15) - 10px - 10px)/3);
+    /*width: calc((100vw - calc(100vw*0.15) - 10px - 10px)/4);*/
+    height: 300px;
+    display: inline-block;
+    background-color: #ffffff;
+    /* 解决div加入内容后下沉 */
+    vertical-align: top;
+}
+.detail_box_financial_statistics_two1{
+    width: calc((100vw - calc(100vw*0.15) - 10px - 10px)/3);
+    height: 300px;
+    display: inline-block;
+    background-color: #ffffff;
+    padding-left: 10px;
+    min-width: 300px;
+}
+.detail_box_financial_statistics_three1{
+    width: calc((100vw - calc(100vw*0.15) - 10px - 10px)/2 - 10px );
+    height: 500px;
+    display: inline-block;
+    background-color: #ffffff;
+    margin-top: 10px;
+    min-width: 500px;
+    /* 解决div加入内容后下沉 */
+    vertical-align: top;
+}
+.detail_box_financial_statistics_three2{
+    width: calc((100vw - calc(100vw*0.15) - 10px - 10px)/2 - 5px );
+    height: 500px;
+    display: inline-block;
+    background-color: #ffffff;
+    margin-top: 10px;
+    margin-left: 15px;
+    min-width: 500px;
+}
+
+.detail_box_meet_list1{
+    width: calc(100vw - calc(100vw*0.15) - 10px - 10px);
+    margin-bottom: 70px;
+    background-color: #ffffff;
+    margin-top: 10px;
+
+}
+
+.box-sizing{
+    width: calc( 100% / 3);
+    height: calc((280px - 19px - 10px - 1px - 10px) / 2);
+    box-sizing:border-box;
+    margin: 0;
+    padding: 0;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 14px;
+    font-variant: tabular-nums;
+    list-style: none;
+    font-feature-settings: "tnum", "tnum";
+    display: inline-block;
+    /* 解决div加入内容后下沉 */
+    vertical-align: top;
+    /*border: #e2e2e2 solid 1px;*/
+}
+
+.box-sizing-div{
+    padding: 20px 24px 8px;
+    width: 100%;
+    height: 100%;
+
+}
+
+.box-sizing-title{
+    width: 100%;
+    height: 50%;
+    color: rgba(0,0,0,.45);
+    font-size: 14px;
+}
+.box-sizing-value{
+    width: 100%;
+    height: 50%;
+    line-height: 30px;
+    font-size: 20px;
+    color: rgba(0,0,0,.85);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    overflow: hidden;
+}
+
