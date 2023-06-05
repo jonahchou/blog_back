@@ -16,16 +16,16 @@
               </el-form-item>
             </el-col>
             <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="4">
-              <el-form-item label="卦名：">
+              <el-form-item label="卦象：">
                 <el-input
                     class="search_input"
-                    v-model="guaMing"
+                    v-model="guaXiang"
                     @keyup.enter.native="getData"
                 />
               </el-form-item>
             </el-col>
             <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="6">
-              <el-form-item label="会议时间：">
+              <el-form-item label="起卦时间：">
                 <el-date-picker
                     @change="getData"
                     style="width: 332px"
@@ -55,7 +55,7 @@
 
     <div className="detail_box_financial_statistics">
       <div class="title_style">
-        会议信息
+        断卦记录
         <div class="function_button" style="width: 200px">
           <el-button type="primary" @click="handleAdd()">新建</el-button>
           <el-popconfirm title="确定删除吗?" @confirm="deleteLiuYao">
@@ -92,12 +92,12 @@
             </template>
           </el-table-column>
           <el-table-column
-              prop="guaMing"
-              label="卦名"
+              prop="guaXiang"
+              label="卦象"
               show-overflow-tooltip
           >
             <template #default="{ row }">
-              {{ row.guaMing || "——" }}
+              {{ row.guaXiang || "——" }}
             </template>
           </el-table-column>
           <el-table-column
@@ -106,21 +106,21 @@
               show-overflow-tooltip
           >
             <template #default="{ row }">
-              {{ row.paiPan || "——" }}
+              <img :src="this.imgUrl+row.paiPan" style="max-width: 100px; max-height: 100px;">
             </template>
           </el-table-column>
           <el-table-column
-              prop="jieGua"
-              label="解卦"
+              prop="duanGua"
+              label="断卦"
               show-overflow-tooltip
           >
             <template #default="{ row }">
-              {{ row.jieGua || "——" }}
+              {{ row.duanGua || "——" }}
             </template>
           </el-table-column>
           <el-table-column
               prop="createTime"
-              label="创建时间"
+              label="起卦时间"
               sortable
               show-overflow-tooltip
           >
@@ -136,8 +136,8 @@
           <el-table-column width="150px">
             <template #header> 操作 </template>
             <template #default="scope">
-              <el-button type="primary" @click="handleUpdate(scope.$index, scope.row)">编辑
-              </el-button>
+              <el-button type="primary" @click="handleDetail(scope.$index, scope.row)">详情</el-button>
+              <el-button type="primary" @click="handleUpdate(scope.$index, scope.row)">编辑</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -169,28 +169,34 @@
       <el-form-item label="问题" prop="wenTi">
         <el-input v-model.trim="bounceFrame.wenTi" style="width: 90%" placeholder="输入问题" />
       </el-form-item>
-      <el-form-item label="卦名" prop="guaMing">
-        <el-input v-model.trim="bounceFrame.guaMing" style="width: 90%" placeholder="输入卦名" />
+      <el-form-item label="卦象" prop="guaXiang">
+        <el-input v-model.trim="bounceFrame.guaXiang" style="width: 90%" placeholder="输入卦名" />
       </el-form-item>
-      <el-form-item label="上传图片" prop="paiPan">
-
+      <el-form-item label="排盘图片" prop="paiPan">
+<!--        <div v-if="bounceFrame.paiPan">-->
+<!--          <img :src="this.imgUrl+bounceFrame.paiPan" style="max-width: 100px; max-height: 100px;" @click="handlePreview2">-->
+<!--        </div>-->
         <el-upload
-            ref="bounceFrame"
-            action="/liuYao/upload"
+            style="display: inline-block"
+            accept=".jpg,.png,.jpeg,JPG,JPEG"
+            :action="this.imgUrl+'/liuYao/upload'"
             :on-success="handleSuccess"
             :on-error="handleError"
-            :on-exceed="handleExceed"
-            :file-list="fileList"
-            :auto-upload="false"
+            :show-file-list="true"
             list-type="picture-card"
+            :limit="1"
+            :on-exceed="handleExceed"
             :on-preview="handlePreview"
+            :file-list="fileList"
+
         >
           <el-icon><Plus /></el-icon>
+
         </el-upload>
 
       </el-form-item>
-      <el-form-item label="解卦" prop="jieGua">
-        <el-input v-model.trim="bounceFrame.jieGua" type="textarea" style="width: 90%" placeholder="请输入卦辞" />
+      <el-form-item label="断卦" prop="duanGua">
+        <el-input v-model.trim="bounceFrame.duanGua" type="textarea" style="width: 90%" placeholder="请输入卦辞" />
       </el-form-item>
       <el-form-item label="起卦时间" prop="createTime">
         <div class="block">
@@ -217,14 +223,23 @@
               </el-button>
             </span>
     </template>
-    <el-dialog :visible.sync="dialogVisible2">
-      <img :src="dialogImageUrl" style="width: 100%">
-    </el-dialog>
+
+  </el-dialog>
+  <el-dialog v-model="dialogVisible2" :visible.sync="dialogVisible2" v-if="dialogVisible2" width="60%">
+    <img :src="dialogImageUrl" style="width: 100%">
+  </el-dialog>
+  <el-dialog class="xiangQing" v-model="dialogVisible3" :visible.sync="dialogVisible3" v-if="dialogVisible3" width="60%">
+    <p><span>所占之事：</span>{{this.detail.wenTi}}</p>
+    <p><span>起卦时间：</span>{{this.detail.createTime}}</p>
+    <p><span>卦象：</span>{{this.detail.guaXiang}}</p>
+    <p><span>排盘：</span><img :src="this.imgUrl+this.detail.paiPan" style="width: 80%;"></p>
+    <p><span>结果：</span>{{this.detail.duanGua}}</p>
+    <p><span>备注：</span>{{this.detail.beiZhu}}</p>
   </el-dialog>
 </template>
 
 <script>
-import { Refresh, Search, UploadFilled,Plus } from "@element-plus/icons-vue";
+import { Refresh, Search, UploadFilled,Plus,zoomIn } from "@element-plus/icons-vue";
 import request from "@/utils/request";
 export default {
   name: "LiuYao",
@@ -243,15 +258,18 @@ export default {
 
       //搜索参数
       wenTi: "",
-      guaMing: "",
+      guaXiang: "",
       searchTime: "",
 
       tipVale: "",
       bounceFrame: {},
       dialogVisible: false,
       dialogVisible2: false,
-      fileList: [],
+      dialogVisible3: false,
       dialogImageUrl: '',
+      fileList: [],
+      ipUrl: "",
+      imgUrl: "",
 
       loading: true,
       deleteIds: [],
@@ -260,21 +278,25 @@ export default {
         wenTi: [
           { required: true, message: "请输入问题", trigger: "change" },
         ],
-        guaMing: [
+        guaXiang: [
           { required: true, message: "请输入卦名", trigger: "change" },
         ],
       },
 
+      detail: {},
     }
   },
   components: {
     Search,
     Refresh,
     UploadFilled,
-    Plus
+    Plus,
   },
   created() {
     this.getData()
+    this.ipUrl=window.location.host
+    this.imgUrl = "http://" + this.ipUrl.replace(/8808/g, "8088")
+    console.log(this.imgUrl)
   },
   methods: {
     getData() {
@@ -284,7 +306,7 @@ export default {
             url: '/liuYao/findLiuYaoPage', // 目标地址
             params: {
               wenTi: this.wenTi,
-              guaMing: this.guaMing,
+              guaXiang: this.guaXiang,
               startTime: this.searchTime[0],
               endTime: this.searchTime[1],
               pageSize: this.PageSize,
@@ -305,7 +327,7 @@ export default {
     },
     reset() {
       this.wenTi = "";
-      this.guaMing = "";
+      this.guaXiang = "";
       this.searchTime = "";
       this.getData()
     },
@@ -324,12 +346,22 @@ export default {
       this.bounceFrame = {}
       this.dialogVisible = true
     },
+    handleDetail: function (index, row) {
+      this.tipVale = "详情"
+      this.dialogVisible3 = true
+      this.detail = row;
+    },
     //编辑框弹出，编辑数据回显
     handleUpdate: function (index, row) {
       this.tipVale = "编辑"
       this.bounceFrame = {}
       this.dialogVisible = true
       this.bounceFrame = row
+      console.log(this.bounceFrame.paiPan)
+      let obj = {};
+      obj.url = this.imgUrl+this.bounceFrame.paiPan;
+      this.fileList.push(obj);
+      console.log(this.fileList)
     },
     // 每页显示的条数
     handleSizeChange(val) {
@@ -350,6 +382,7 @@ export default {
     //关闭对话框,清除输入的数据
     handleClose(done) {
       this.$refs.ruleFormRef.resetFields();
+      this.fileList=[]
       done();
     },
     //更新/添加数据
@@ -410,7 +443,11 @@ export default {
       })
     },
     handleSuccess(response, file, fileList) {
-      this.bounceFrame.imageUrl = response.data.imageUrl; // 将上传后的图片地址保存到表单数据中
+      debugger
+        // 上传成功后，保存图片地址
+      this.bounceFrame.paiPan = response;
+      console.log(this.bounceFrame.paiPan)
+
     },
     handleError(error, file, fileList) {
       this.$message.error('上传失败');
@@ -420,12 +457,28 @@ export default {
     },
     handlePreview(file) {
       this.dialogImageUrl = file.url;
+      console.log(file.url)
       this.dialogVisible2 = true;
     },
+    // handlePreview2() {
+    //   this.dialogImageUrl = this.imgUrl+this.bounceFrame.paiPan;
+    //   console.log(this.bounceFrame.paiPan)
+    //   this.dialogVisible3 = true;
+    // },
   }
 }
 </script>
 
 <style scoped>
 @import "../../src/assets/css/views/commonStyle.css";
+.xiangQing p{
+  margin-top: 20px;
+  font-size: 20px;
+}
+.xiangQing p span{
+  font-size: larger;
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
 </style>
